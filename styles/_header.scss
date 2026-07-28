@@ -1,0 +1,572 @@
+$mobile: 400px;
+$small-tablet: 600px;
+$tablet: 768px;
+$desktop: 769px;
+
+$black: #000;
+$white: #fff;
+$text-muted: #898989;
+
+header {
+  position: relative;
+
+  width: 100%;
+  height: 130px;
+  background:
+    #dbdbdb
+    url("/images/escheresque_@2X.png")
+    repeat;
+  background-size: 46px 29px;
+  border-bottom: 1px solid #e5e5e5;
+
+  .header-content {
+    position: absolute;
+    top: 24px;
+    right: 0;
+    left: 0;
+    width: min(100%, 1290px);
+    height: auto;
+    margin-inline: auto;
+  }
+
+  a {
+    border: none;
+  }
+
+  // Logo
+  .logo {
+    position: absolute;
+    top: 6px;
+    left: 35px;
+    z-index: 601;
+
+    a {
+      display: block;
+      width: 60px;
+      height: 60px;
+      margin: 0;
+      padding: 0;
+      background:
+        url("/images/logo.png")
+        no-repeat center;
+      background-size: 60px 60px;
+      border: none;
+      outline: 0;
+      color: transparent;
+      font: 0/0 a;
+      text-shadow: none;
+      transition: all 0.5s ease-in-out;
+    }
+  }
+
+  &.search-visible {
+    .search-wrap {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
+
+// Triggers
+.triggers {
+  position: absolute;
+  top: 18px;
+  right: 35px;
+
+  .search-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    color: $black;
+
+    svg {
+      display: block;
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+}
+
+// Main navigation
+#main-nav-wrap {
+  display: table;
+  float: right;
+  height: 78px;
+  padding-right: 85px;
+  font-family: "montserrat-regular", sans-serif;
+  font-size: 15px;
+}
+
+.main-navigation {
+  display: table-cell;
+  vertical-align: middle;
+  list-style: none;
+
+  li {
+    position: relative;
+    display: inline-block;
+    float: left;
+    margin-right: 22px;
+    padding: 0;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    a {
+      display: block;
+      padding-bottom: 9px;
+      color: $text-muted;
+      border: none;
+
+      &:hover {
+        color: $black;
+      }
+    }
+
+    > a {
+      border-bottom: 2px solid transparent;
+    }
+
+    &.current {
+      > a {
+        color: $black;
+        border-bottom-color: #151515;
+        font-family: "montserrat-bold", sans-serif;
+      }
+    }
+
+    &:hover > ul,
+    &.sfHover > ul {
+      display: block;
+    }
+  }
+
+  ul {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 500;
+    display: none;
+    margin: 0;
+    background: #f4f4f4;
+    border-radius: 0 0 3px 3px;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 15%);
+    font-size: 11px;
+
+    ul {
+      top: 0;
+      left: calc(100% + 1px);
+      border-radius: 0 3px 3px;
+    }
+
+    li {
+      display: block;
+      width: 100%;
+      min-height: 48px;
+      margin: 0;
+      padding: 0;
+      border-bottom: 1px solid rgb(0 0 0 / 5%);
+      text-align: left;
+
+      &:last-child {
+        border: none;
+      }
+
+      a {
+        display: block;
+        padding: 16.5px 25px;
+        color: #8e8e8e;
+        font-family: "muli-regular", sans-serif;
+        font-size: 14px;
+        line-height: 15px;
+        white-space: nowrap;
+
+        &:hover {
+          color: $black;
+          background: transparent;
+        }
+      }
+    }
+  }
+}
+
+// Search overlay
+.search-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 900;
+  display: block;
+  visibility: hidden;
+  width: 100%;
+  height: 100%;
+  background: $white;
+  opacity: 0;
+  text-align: center;
+  transition:
+    opacity 0.2s ease-in-out,
+    visibility 0.2s ease-in-out;
+
+  .search-form {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+
+    &::after {
+      content: "Press Enter to begin your search.";
+      display: block;
+      margin-top: 3rem;
+      color: #999;
+      font-size: 1.6rem;
+      letter-spacing: 0.6px;
+      text-align: center;
+    }
+
+    input[type="submit"] {
+      display: none;
+    }
+
+    input::placeholder {
+      color: $black;
+      opacity: 1;
+      text-align: center;
+    }
+  }
+
+  input[type="search"] {
+    display: block;
+    width: 100%;
+    max-width: 680px;
+    height: auto;
+    margin: 0 auto;
+    padding-top: 0.6rem !important;
+    padding-bottom: 0.6rem !important;
+    color: $black;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #dedede;
+    font-family: "montserrat-bold", sans-serif;
+    font-size: 6.3rem;
+    line-height: 1.523;
+    letter-spacing: 0.02rem;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .close-btn {
+    position: fixed;
+    top: 21px;
+    left: 50%;
+    display: block;
+    width: 45px;
+    height: 45px;
+    margin-left: -23px;
+    color: transparent;
+    font: 0/0 a;
+    text-shadow: none;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 12px;
+      left: 22px;
+      display: inline-block;
+      width: 2px;
+      height: 20px;
+      background-color: #333;
+    }
+
+    &::before {
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+// Tablet and mobile
+@media only screen and (max-width: $tablet) {
+  header {
+    .logo {
+      left: 45px;
+    }
+  }
+
+  .triggers {
+    top: 12px;
+    right: 40px;
+    z-index: 601;
+
+    .menu-toggle {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      display: block;
+      width: 40px;
+      height: 40px;
+    }
+
+    .search-trigger {
+      position: absolute;
+      top: 50%;
+      right: 45px;
+      display: block;
+      width: 2.6rem;
+      height: 3rem;
+      margin-top: 5px;
+      font-size: 21px;
+      line-height: 3rem;
+      text-align: left;
+    }
+  }
+
+  #main-nav-wrap {
+    position: absolute;
+    top: -24px;
+    right: 0;
+    z-index: 600;
+    display: block;
+    float: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .menu-toggle {
+    span {
+      position: absolute;
+      top: 50%;
+      right: 8px;
+      display: block;
+      width: 24px;
+      height: 3px;
+      margin-top: -1.5px;
+      color: transparent;
+      background-color: $black;
+      font: 0/0 a;
+      text-shadow: none;
+      transition: background 0.2s ease-in-out;
+
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: inherit;
+        transition-duration: 0.2s, 0.2s;
+        transition-delay: 0.2s, 0s;
+      }
+
+      &::before {
+        top: -8px;
+        transition-property: top, transform;
+      }
+
+      &::after {
+        bottom: -8px;
+        transition-property: bottom, transform;
+      }
+    }
+
+    &.is-clicked {
+      span {
+        background-color: transparent;
+
+        &::before,
+        &::after {
+          background-color: $black;
+          transition-delay: 0s, 0.2s;
+        }
+
+        &::before {
+          top: 0;
+          transform: rotate(45deg);
+        }
+
+        &::after {
+          bottom: 0;
+          transform: rotate(-45deg);
+        }
+      }
+    }
+  }
+
+  .main-navigation {
+    display: none;
+    clear: both;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 132px 45px 54px;
+    background: $white;
+    box-shadow: 0 3px 3px rgb(0 0 0 / 15%);
+
+    &.is-open {
+      display: block;
+    }
+
+    li {
+      float: none;
+
+      a {
+        display: block;
+        width: auto;
+        padding: 18px 0;
+        color: #848484;
+        border: none;
+        line-height: 24px;
+
+        &:hover {
+          color: $black;
+          border: none;
+        }
+      }
+
+      &.current > a {
+        color: $black;
+        border: none;
+      }
+
+      &.has-children {
+        > a {
+          position: relative;
+
+          &::after {
+            content: "\f067";
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 20px;
+            height: 20px;
+            margin-top: -10px;
+            padding-left: 10px;
+            color: $black;
+            background: none;
+            font-family: "FontAwesome";
+            font-size: 12px;
+            line-height: 20px;
+            transition: all 0.2s ease-in-out;
+          }
+        }
+
+        &:hover > a::after {
+          content: "\f068";
+        }
+
+        ul {
+          position: static;
+          margin-top: -6px;
+          background: $white;
+          box-shadow: none;
+
+          ul {
+            margin-bottom: 0;
+          }
+        }
+
+        li {
+          min-height: 48px;
+          margin: 0;
+          padding-left: 12px;
+          border: none;
+
+          a {
+            padding: 18px 25px 18px 0;
+          }
+
+          &:last-child {
+            margin-bottom: 18px;
+          }
+        }
+      }
+    }
+
+    > li {
+      display: block;
+      min-height: 60px;
+      margin-right: 0;
+      border: none;
+      text-align: left;
+    }
+  }
+
+  .search-wrap {
+    .search-form::after {
+      font-size: 1.5rem;
+    }
+
+    input[type="search"] {
+      width: 80%;
+      max-width: none;
+      font-size: 4.6rem;
+    }
+  }
+}
+
+@media only screen and (max-width: $small-tablet) {
+  header {
+    .logo {
+      left: 35px;
+    }
+  }
+
+  .triggers {
+    right: 30px;
+  }
+
+  .search-wrap {
+    input[type="search"] {
+      font-size: 3.2rem;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile) {
+  header {
+    height: 118px;
+
+    .logo {
+      left: 25px;
+
+      a {
+        width: 54px;
+        height: 54px;
+        background-size: 54px 54px;
+      }
+    }
+  }
+
+  .triggers {
+    right: 20px;
+  }
+
+  .search-wrap {
+    input[type="search"] {
+      font-size: 2.4rem;
+    }
+  }
+}
+
+// Luôn hiện menu desktop
+@media only screen and (min-width: $desktop) {
+  #main-nav-wrap {
+    ul.main-navigation {
+      display: table-cell !important;
+    }
+  }
+}
