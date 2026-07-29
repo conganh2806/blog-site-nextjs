@@ -1,3 +1,5 @@
+import { BackToTop } from './BackToTop';
+
 export function Footer() {
   return (
     <footer>
@@ -92,21 +94,7 @@ export function Footer() {
               </span>
             </div>
 
-            <div id="go-top">
-              <a title="Back to Top" href="#top" aria-label="Back to top">
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="m18 15-6-6-6 6" />
-                </svg>
-              </a>
-            </div>
+            <BackToTop />
           </div>
         </div>
       </div>
