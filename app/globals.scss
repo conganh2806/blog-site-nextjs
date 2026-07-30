@@ -1,4 +1,13 @@
 /* React replacements for the template's jQuery plugins. */
+.top-progress .pace-progress {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.22);
+  transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.top-progress.pace-inactive .pace-progress {
+  transition: none;
+}
+
 .react-slider {
   position: relative;
 }
@@ -385,6 +394,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .top-progress .pace-progress {
+    transition-duration: 0.01ms !important;
+  }
+
   #featured-post-slider .slides > li {
     animation-duration: 0.01ms !important;
   }

@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
+
+import { TopProgressBar } from "@/components/layout/TopProgressBar";
 
 import '../styles/base.css';
 import '../styles/vendor.css';
@@ -23,7 +26,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body id="top">{children}</body>
+      <body id="top">
+        <Suspense
+          fallback={(
+            <div className="pace top-progress pace-active" aria-hidden="true">
+              <div className="pace-progress" />
+            </div>
+          )}
+        >
+          <TopProgressBar />
+        </Suspense>
+        {children}
+      </body>
     </html>
   );
 }
