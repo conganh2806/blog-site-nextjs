@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
-  FormEvent,
   MouseEvent,
+  SubmitEvent,
   useEffect,
   useRef,
   useState,
@@ -34,10 +34,10 @@ const navigationItems: NavigationItem[] = [
     href: '/blog',
     label: 'Blog',
     children: [
-      { href: '/blog/video', label: 'Video Post' },
-      { href: '/blog/audio', label: 'Audio Post' },
-      { href: '/blog/gallery', label: 'Gallery Post' },
-      { href: '/blog/standard', label: 'Standard Post' },
+      { href: '/blog/video-post-format', label: 'Video Post' },
+      { href: '/blog/audio-format-post', label: 'Audio Post' },
+      { href: '/blog/workspace-design-trends', label: 'Gallery Post' },
+      { href: '/blog/standard-format-post', label: 'Standard Post' },
     ],
   },
   { href: '/styles', label: 'Styles' },
@@ -89,7 +89,7 @@ export function Header() {
     setIsMenuOpen((currentValue) => !currentValue);
   };
 
-  const handleSearch = (event: FormEvent<HTMLFormElement>) => {
+  const handleSearch = (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);

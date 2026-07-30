@@ -1,9 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 
-import { Footer } from '@/components/layout/Footer';
-import { Header } from '@/components/layout/Header';
-
 export const metadata: Metadata = {
   title: 'About',
   description: 'Learn more about the Abstract team and how we work.',
@@ -18,10 +15,7 @@ const details = [
 
 export default function AboutPage() {
   return (
-    <>
-      <Header />
-
-      <main>
+    <main>
         <section id="content-wrap" className="site-page">
           <div className="row">
             <div className="col-twelve">
@@ -79,9 +73,6 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
-      </main>
-
-      <Footer />
-    </>
+    </main>
   );
 }

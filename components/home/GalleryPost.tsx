@@ -4,18 +4,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
-const galleryImages = [
-  '/images/thumbs/gallery/work1.jpg',
-  '/images/thumbs/gallery/work2.jpg',
-  '/images/thumbs/gallery/work3.jpg',
-];
+import type { ContentPost } from '@/lib/content/types';
 
 interface GalleryPostProps {
-  excerpt: string;
+  post: ContentPost;
 }
 
-export function GalleryPost({ excerpt }: GalleryPostProps) {
+export function GalleryPost({ post }: GalleryPostProps) {
   const [activeSlide, setActiveSlide] = useState(0);
+  const galleryImages = post.galleryImages ?? [post.image];
 
   const showNextSlide = () => {
     setActiveSlide((currentSlide) =>
@@ -77,19 +74,20 @@ export function GalleryPost({ excerpt }: GalleryPostProps) {
         <div className="entry-header">
           <div className="entry-meta">
             <span className="cat-links">
-              <Link href="/category?name=branding">Branding</Link>
-              <Link href="/category?name=wordpress">Wordpress</Link>
+              {post.categories.map((category) => (
+                <Link key={category.id} href={`/category?name=${category.slug}`}>
+                  {category.name}
+                </Link>
+              ))}
             </span>
           </div>
 
           <h1 className="entry-title">
-            <Link href="/blog/gallery">
-              Workspace Design Trends and Ideas.
-            </Link>
+            <Link href={`/blog/${post.slug}`}>{post.title}</Link>
           </h1>
         </div>
 
-        <div className="entry-excerpt">{excerpt}</div>
+        <div className="entry-excerpt">{post.excerpt}</div>
       </div>
     </article>
   );

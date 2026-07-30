@@ -11,6 +11,100 @@
   display: block;
 }
 
+#featured-post-slider .slides {
+  overflow: hidden;
+  position: relative;
+}
+
+#featured-post-slider .slides > li {
+  display: block;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  visibility: hidden;
+  will-change: opacity, transform;
+}
+
+#featured-post-slider .slides > li.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  position: relative;
+  visibility: visible;
+  z-index: 2;
+}
+
+#featured-post-slider .slides > li.is-leaving {
+  pointer-events: none;
+  position: absolute;
+  visibility: visible;
+  z-index: 1;
+}
+
+#featured-post-slider .slides > li.is-entering-next {
+  animation: featured-slide-in-next 680ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+#featured-post-slider .slides > li.is-leaving-next {
+  animation: featured-slide-out-next 680ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+#featured-post-slider .slides > li.is-entering-previous {
+  animation: featured-slide-in-previous 680ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+#featured-post-slider .slides > li.is-leaving-previous {
+  animation: featured-slide-out-previous 680ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes featured-slide-in-next {
+  from {
+    opacity: 0;
+    transform: translate3d(14%, 0, 0) scale(1.025);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes featured-slide-out-next {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(-10%, 0, 0) scale(0.985);
+  }
+}
+
+@keyframes featured-slide-in-previous {
+  from {
+    opacity: 0;
+    transform: translate3d(-14%, 0, 0) scale(1.025);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes featured-slide-out-previous {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(10%, 0, 0) scale(0.985);
+  }
+}
+
 .react-slider .flex-direction-nav button {
   position: absolute;
   top: 50%;
@@ -109,8 +203,195 @@
   display: block;
 }
 
-@media only screen and (max-width: 768px) {
-  .main-navigation li:focus-within > ul {
+.content-state {
+  align-items: center;
+  color: #777;
+  display: flex;
+  font-size: 1.5rem;
+  gap: 14px;
+  justify-content: center;
+  min-height: 360px;
+  text-align: center;
+}
+
+.content-state p {
+  margin: 0;
+}
+
+.content-state button {
+  background: #151515;
+  border: 0;
+  border-radius: 3px;
+  color: #fff;
+  padding: 10px 16px;
+}
+
+.single-post-state {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.6rem;
+  gap: 12px;
+  justify-content: center;
+  min-height: 540px;
+  padding: 40px 20px;
+}
+
+.single-post-state p {
+  margin: 0;
+}
+
+.single-post-state a {
+  color: #c65331;
+}
+
+.blog-single .content-media .audio-wrap audio {
+  display: block;
+  height: 42px;
+  width: 100%;
+}
+
+.single-post-gallery {
+  overflow: hidden;
+}
+
+.single-post-gallery > img {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.single-gallery-controls {
+  bottom: 20px;
+  display: flex;
+  gap: 8px;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+  z-index: 5;
+}
+
+.single-gallery-controls button {
+  background: rgba(255, 255, 255, 0.65);
+  border: 0;
+  border-radius: 50%;
+  height: 10px;
+  padding: 0;
+  transition: background 180ms ease, transform 180ms ease;
+  width: 10px;
+}
+
+.single-gallery-controls button.is-active {
+  background: #fff;
+  transform: scale(1.25);
+}
+
+.blog-single .next-nav {
+  text-align: right;
+}
+
+.comment-success {
+  background: #e8f5eb;
+  border-left: 3px solid #4d9271;
+  color: #356b50;
+  margin-bottom: 2.4rem;
+  padding: 1.2rem 1.5rem;
+}
+
+/* Animated navigation dropdowns. Keeping the submenu in the render tree lets
+   opacity and movement transition instead of snapping from display: none. */
+@media only screen and (min-width: 769px) {
+  .main-navigation > li > .sub-menu {
     display: block;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate3d(0, 14px, 0) scale(0.98);
+    transform-origin: top left;
+    transition:
+      opacity 180ms cubic-bezier(0.4, 0, 1, 1),
+      transform 280ms cubic-bezier(0.4, 0, 1, 1),
+      visibility 0s linear 280ms;
+    visibility: hidden;
+    will-change: opacity, transform;
+  }
+
+  .main-navigation > li:hover > .sub-menu,
+  .main-navigation > li:focus-within > .sub-menu,
+  .main-navigation > li.sfHover > .sub-menu {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate3d(0, 0, 0) scale(1);
+    transition:
+      opacity 220ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
+      visibility 0s;
+    visibility: visible;
+  }
+
+  .main-navigation > li > .sub-menu > li {
+    opacity: 0;
+    transform: translateY(7px);
+    transition:
+      opacity 160ms cubic-bezier(0.4, 0, 1, 1),
+      transform 200ms cubic-bezier(0.4, 0, 1, 1);
+  }
+
+  .main-navigation > li:hover > .sub-menu > li,
+  .main-navigation > li:focus-within > .sub-menu > li,
+  .main-navigation > li.sfHover > .sub-menu > li {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity 240ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 360ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @for $item from 1 through 8 {
+    .main-navigation > li:hover > .sub-menu > li:nth-child(#{$item}),
+    .main-navigation > li:focus-within > .sub-menu > li:nth-child(#{$item}),
+    .main-navigation > li.sfHover > .sub-menu > li:nth-child(#{$item}) {
+      transition-delay: #{($item - 1) * 28}ms;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .main-navigation li.has-children > .sub-menu {
+    display: block;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transform: translateY(-10px);
+    transition:
+      max-height 480ms cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 180ms cubic-bezier(0.4, 0, 1, 1),
+      transform 300ms cubic-bezier(0.4, 0, 1, 1),
+      visibility 0s linear 480ms;
+    visibility: hidden;
+  }
+
+  .main-navigation li.has-children:hover > .sub-menu,
+  .main-navigation li.has-children:focus-within > .sub-menu {
+    max-height: 440px;
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      max-height 560ms cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 260ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
+      visibility 0s;
+    visibility: visible;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #featured-post-slider .slides > li {
+    animation-duration: 0.01ms !important;
+  }
+
+  .main-navigation .sub-menu,
+  .main-navigation .sub-menu > li {
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
   }
 }

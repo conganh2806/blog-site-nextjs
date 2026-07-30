@@ -1,52 +1,72 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-const featuredPosts = [
-  {
-    author: 'Naruto Uzumaki',
-    date: 'September 06, 2016',
-    image: '/images/thumbs/featured/featured-1.jpg',
-    title: 'Minimalism Never Goes Out of Style',
-  },
-  {
-    author: 'Sasuke Uchiha',
-    date: 'August 29, 2016',
-    image: '/images/thumbs/featured/featured-2.jpg',
-    title: 'Enhancing Your Designs with Negative Space',
-  },
-  {
-    author: 'Naruto Uzumaki',
-    date: 'August 27, 2016',
-    image: '/images/thumbs/featured/featured-3.jpg',
-    title: 'Music Album Cover Designs for Inspiration',
-  },
-];
+import type { ContentPost } from '@/lib/content/types';
 
-export function FeaturedPosts() {
+interface FeaturedPostsProps {
+  posts: ContentPost[];
+}
+
+function formatDate(value: string) {
+  return new Intl.DateTimeFormat('en', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+  }).format(new Date(value));
+}
+
+export function FeaturedPosts({ posts }: FeaturedPostsProps) {
   const [activeSlide, setActiveSlide] = useState(0);
+  const [transition, setTransition] = useState<{
+    direction: 'next' | 'previous';
+    from: number;
+    to: number;
+  } | null>(null);
+  const activeSlideRef = useRef(0);
+  const transitionTimerRef = useRef<number | null>(null);
+
+  const changeSlide = useCallback((direction: 'next' | 'previous') => {
+    const currentSlide = activeSlideRef.current;
+    const offset = direction === 'next' ? 1 : -1;
+    const nextSlide =
+      (currentSlide + offset + posts.length) % posts.length;
+
+    if (transitionTimerRef.current !== null) {
+      window.clearTimeout(transitionTimerRef.current);
+    }
+
+    activeSlideRef.current = nextSlide;
+    setTransition({ direction, from: currentSlide, to: nextSlide });
+    setActiveSlide(nextSlide);
+
+    transitionTimerRef.current = window.setTimeout(() => {
+      setTransition(null);
+      transitionTimerRef.current = null;
+    }, 680);
+  }, [posts.length]);
 
   useEffect(() => {
     const intervalId = window.setInterval(() => {
-      setActiveSlide((currentSlide) =>
-        (currentSlide + 1) % featuredPosts.length
-      );
+      changeSlide('next');
     }, 7000);
 
-    return () => window.clearInterval(intervalId);
-  }, []);
+    return () => {
+      window.clearInterval(intervalId);
+
+      if (transitionTimerRef.current !== null) {
+        window.clearTimeout(transitionTimerRef.current);
+      }
+    };
+  }, [changeSlide]);
 
   const showPreviousSlide = () => {
-    setActiveSlide((currentSlide) =>
-      (currentSlide - 1 + featuredPosts.length) % featuredPosts.length
-    );
+    changeSlide('previous');
   };
 
   const showNextSlide = () => {
-    setActiveSlide((currentSlide) =>
-      (currentSlide + 1) % featuredPosts.length
-    );
+    changeSlide('next');
   };
 
   return (
@@ -58,12 +78,19 @@ export function FeaturedPosts() {
           aria-label="Featured posts"
         >
           <ul className="slides" aria-live="polite">
-            {featuredPosts.map((post, index) => (
-              <li
-                key={post.title}
-                className={index === activeSlide ? 'is-active' : ''}
-                aria-hidden={index !== activeSlide}
-              >
+            {posts.map((post, index) => {
+              const slideClasses = [
+                index === activeSlide ? 'is-active' : '',
+                transition?.to === index ? `is-entering is-entering-${transition.direction}` : '',
+                transition?.from === index ? `is-leaving is-leaving-${transition.direction}` : '',
+              ].filter(Boolean).join(' ');
+
+              return (
+                <li
+                  key={post.id}
+                  className={slideClasses}
+                  aria-hidden={index !== activeSlide}
+                >
                 <div className="featured-post-slide">
                   <div
                     className="post-background"
@@ -73,19 +100,20 @@ export function FeaturedPosts() {
 
                   <div className="post-content">
                     <ul className="entry-meta">
-                      <li>{post.date}</li>
+                      <li>{formatDate(post.publishedAt)}</li>
                       <li>
                         <Link href="/about">{post.author}</Link>
                       </li>
                     </ul>
 
                     <h1 className="slide-title">
-                      <Link href="/blog/standard">{post.title}</Link>
+                      <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                     </h1>
                   </div>
                 </div>
-              </li>
-            ))}
+                </li>
+              );
+            })}
           </ul>
 
           <ul className="flex-direction-nav" aria-label="Slider controls">
