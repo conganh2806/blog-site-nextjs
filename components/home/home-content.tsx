@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 
 import type { PublicContentResponse } from '@/lib/content/types';
 
-import { FeaturedPosts } from './FeaturedPosts';
-import { MasonryGrid } from './MasonryGrid';
-import { PostGrid } from './PostGrid';
+import { FeaturedPosts } from './featured-posts';
+import { MasonryGrid } from './masonry-grid';
+import { PostGrid } from './post-grid';
 
 export function HomeContent() {
   const [content, setContent] = useState<PublicContentResponse | null>(null);

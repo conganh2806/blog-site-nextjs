@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 
-import { PostPageContent } from "@/components/blog/PostPageContent";
+import { PostPageContent } from "@/components/blog/post-page-content";
 import { getPostDetail } from "@/lib/content/store";
 
 interface BlogPostPageProps {

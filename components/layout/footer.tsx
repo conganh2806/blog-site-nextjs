@@ -1,4 +1,4 @@
-import { BackToTop } from './BackToTop';
+import { BackToTop } from './back-to-top';
 
 export function Footer() {
   return (

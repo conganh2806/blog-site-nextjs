@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 
-import { TopProgressBar } from "@/components/layout/TopProgressBar";
+import { TopProgressBar } from "@/components/layout/top-progress-bar";
 
 import '../styles/base.css';
 import '../styles/vendor.css';

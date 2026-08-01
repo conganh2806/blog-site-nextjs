@@ -1,5 +1,5 @@
-import { HomeContent } from '@/components/home/HomeContent';
-import { Pagination } from '@/components/home/Pagination';
+import { HomeContent } from '@/components/home/home-content';
+import { Pagination } from '@/components/home/pagination';
 
 export default function HomePage() {
   return (

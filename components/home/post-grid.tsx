@@ -1,7 +1,7 @@
 import type { ContentPost } from '@/lib/content/types';
 
-import { GalleryPost } from './GalleryPost';
-import { PostCard } from './PostCard';
+import { GalleryPost } from './gallery-post';
+import { PostCard } from './post-card';
 
 interface PostGridProps {
   posts: ContentPost[];

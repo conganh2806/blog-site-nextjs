@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
-import { LoginForm } from "@/components/admin/LoginForm";
+import { LoginForm } from "@/components/admin/login-form";
 import styles from "@/components/admin/admin.module.scss";
 import { getAdminSession } from "@/lib/auth/auth";
 

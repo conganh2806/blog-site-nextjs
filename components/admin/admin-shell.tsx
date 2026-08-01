@@ -2,8 +2,8 @@ import Link from "next/link";
 
 import type { AdminSession } from "@/lib/auth/session";
 
-import { AdminNavigation } from "./AdminNavigation";
-import { LogoutButton } from "./LogoutButton";
+import { AdminNavigation } from "./admin-navigation";
+import { LogoutButton } from "./logout-button";
 import styles from "./admin.module.scss";
 
 interface AdminShellProps {
