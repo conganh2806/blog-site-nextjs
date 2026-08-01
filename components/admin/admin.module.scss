@@ -225,15 +225,15 @@
 
   nav {
     margin-top: 54px;
-  }
 
-  nav > p {
-    color: #747d89;
-    font-family: "montserrat-bold", sans-serif;
-    font-size: 1rem;
-    letter-spacing: 0.14em;
-    margin: 0 12px 12px;
-    text-transform: uppercase;
+    > p {
+      color: #747d89;
+      font-family: "montserrat-bold", sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.14em;
+      margin: 0 12px 12px;
+      text-transform: uppercase;
+    }
   }
 
   ul {
@@ -338,10 +338,10 @@
     align-items: center;
     display: flex;
     gap: 11px;
-  }
 
-  > div > div {
-    display: grid;
+    > div {
+      display: grid;
+    }
   }
 
   strong {
@@ -561,11 +561,11 @@
   td {
     color: #4b535d;
     font-size: 1.3rem;
-  }
 
-  td:first-child {
-    color: #242a31;
-    font-family: "montserrat-bold", sans-serif;
+    &:first-child {
+      color: #242a31;
+      font-family: "montserrat-bold", sans-serif;
+    }
   }
 
   tr:last-child td {
@@ -816,15 +816,15 @@
     gap: 12px;
     grid-template-columns: 10px minmax(160px, 1fr) auto auto;
     padding: 16px 22px;
-  }
 
-  article:last-child {
-    border-bottom: 0;
-  }
+    &:last-child {
+      border-bottom: 0;
+    }
 
-  article > div {
-    display: grid;
-    gap: 2px;
+    > div {
+      display: grid;
+      gap: 2px;
+    }
   }
 
   strong {
@@ -910,10 +910,10 @@
   .loginIntro {
     min-height: 220px;
     padding: 32px;
-  }
 
-  .loginIntro h1 {
-    margin-top: 42px;
+    h1 {
+      margin-top: 42px;
+    }
   }
 
   .loginContent {
@@ -943,30 +943,32 @@
     display: none;
   }
 
-  .sidebar nav {
-    margin: 0;
-  }
+  .sidebar {
+    nav {
+      margin: 0;
+    }
 
-  .sidebar ul {
-    display: flex;
-  }
+    ul {
+      display: flex;
+    }
 
-  .sidebar li {
-    flex: 1;
-    margin: 0;
-  }
+    li {
+      flex: 1;
+      margin: 0;
+    }
 
-  .sidebar nav a {
-    flex-direction: column;
-    font-size: 1rem;
-    gap: 3px;
-    padding: 5px;
-  }
+    nav a {
+      flex-direction: column;
+      font-size: 1rem;
+      gap: 3px;
+      padding: 5px;
 
-  .sidebar nav a span {
-    background: transparent;
-    height: 26px;
-    width: 26px;
+      span {
+        background: transparent;
+        height: 26px;
+        width: 26px;
+      }
+    }
   }
 
   .adminHeader,
@@ -1019,9 +1021,9 @@
 
   .categoryList article {
     grid-template-columns: 10px minmax(120px, 1fr) auto;
-  }
 
-  .categoryList article > span:nth-of-type(2) {
-    display: none;
+    > span:nth-of-type(2) {
+      display: none;
+    }
   }
 }
